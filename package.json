@@ -2,21 +2,29 @@
   "name": "k121",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "engines": {
+    "node": ">= 8",
+    "npm": ">= 5"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "@std/esm": {
+    "esm": "all"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "export NODE_ENV=development && node -r @std/esm app.js"
+  },
+  "author": "Felipe Orlando",
   "dependencies": {
+    "@std/esm": "^0.18.0",
     "express": "^4.16.2",
     "mongoose": "^5.0.0-rc1",
     "node-resque": "^5.1.0"
   },
   "devDependencies": {
+    "babel-eslint": "^8.1.2",
     "eslint": "^4.14.0",
     "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-import": "^2.8.0"
   }
 }
