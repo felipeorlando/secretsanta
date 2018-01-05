@@ -2,21 +2,18 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import logger from 'morgan';
+import configs from './configs';
 import Routes from './routes';
-
-const PORT = 8888;
-const HOST_NAME = 'localhost';
-const DATABASE_NAME = 'shoppingList';
 
 const app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 
-mongoose.connect(`mongodb://${HOST_NAME}/${DATABASE_NAME}`);
+mongoose.connect(`mongodb://${configs.db.host}/${configs.db.name}`);
 
 new Routes(app).registerRoutes();
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://${HOST_NAME}:${PORT}`);
+  console.log(`Server running at http://${configs.app.host}:${configs.app.port}`);
 });
