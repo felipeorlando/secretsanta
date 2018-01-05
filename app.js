@@ -14,6 +14,6 @@ mongoose.connect(`mongodb://${configs.db.host}/${configs.db.name}`);
 
 new Routes(app).registerRoutes();
 
-app.listen(PORT, () => {
+app.listen(configs.app.port, () => {
   console.log(`Server running at http://${configs.app.host}:${configs.app.port}`);
 });
