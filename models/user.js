@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import UserSchema from './schemas/user';
 
 class User {
   static encryptPassword(password, next) {
@@ -24,38 +25,9 @@ class User {
       callback(null, isMatch);
     });
   }
-
-  static validateEmail(email) {
-    const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return emailFormat.test(email);
-  }
 }
 
-const schema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    lowercase: true,
-    unique: true,
-    required: true,
-    validate: [User.validateEmail, 'Please fill a valid email address'],
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  admin: {
-    type: Boolean,
-    default: false,
-  },
-  created: {
-    type: Date,
-    default: Date.now,
-  },
-});
+const schema = UserSchema.init();
 
 schema.loadClass(User);
 
