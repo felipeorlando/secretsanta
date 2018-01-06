@@ -11,9 +11,8 @@ class UserController {
 
   create(req, res) {
     const params = req.body.user;
-    const newUser = new User(params);
 
-    newUser.save((error, user) => {
+    User.create(params, (error, user) => {
       if (error) return res.status(200).json({ error });
 
       res.status(200).json({ user });
