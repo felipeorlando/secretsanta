@@ -9,6 +9,7 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(`mongodb://${configs.db.host}/${configs.db.name}`);
 
