@@ -1,0 +1,15 @@
+{
+  "verbose": true,
+  "watch": [
+    "configs/",
+    "controllers/",
+    "jobs/",
+    "models/",
+    "routes/",
+    "service/"
+  ],
+  "ext": "js",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
