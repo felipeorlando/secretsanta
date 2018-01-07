@@ -15,11 +15,16 @@ class Schema {
         required: true,
         validate: [EmailValidator.format, 'Please fill a valid email address'],
       },
-      created: {
-        type: Date,
-        default: Date.now,
+      matchedPerson: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Person',
+        default: null,
       },
-    });
+      isMatched: {
+        type: Boolean,
+        default: false,
+      },
+    }, { timestamps: true });
   }
 }
 
