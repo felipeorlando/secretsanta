@@ -2,20 +2,11 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
 import UserSchema from './schemas/user';
 
-class User {
-  static encryptPassword(password, next) {
-    if (this.isNew || this.isModified('password')) {
-      bcrypt.genSalt(10, (saltError, salt) => {
-        if (saltError) return next(saltError);
+class User extends mongoose.Model {
+  encryptPassword(password) {
+    const salt = bcrypt.genSaltSync(10);
 
-        bcrypt.hash(this.password, salt, (hashError, hash) => {
-          if (hashError) return next(hashError);
-
-          this.password = hash;
-          next();
-        });
-      });
-    }
+    return bcrypt.hashSync(password, salt);
   }
 
   static comparePassword(passwordParam, callback) {
@@ -25,10 +16,12 @@ class User {
       callback(null, isMatch);
     });
   }
+
+  async save(params, next) {
+    this.password = this.encryptPassword(this.password);
+
+    await super.save(params, next);
+  }
 }
 
-const schema = UserSchema.init();
-
-schema.loadClass(User);
-
-export default mongoose.model('User', schema);
+export default mongoose.model(User, UserSchema.init());
