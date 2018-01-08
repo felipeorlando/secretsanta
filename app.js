@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import logger from 'morgan';
+import Passport from './configs/passport';
 import configs from './configs';
 import Routes from './routes';
 
@@ -12,6 +13,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(`mongodb://${configs.db.host}/${configs.db.name}`);
+
+new Passport().init();
 
 new Routes(app).registerRoutes();
 

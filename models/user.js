@@ -9,11 +9,11 @@ class User extends mongoose.Model {
     return bcrypt.hashSync(password, salt);
   }
 
-  static comparePassword(passwordParam, callback) {
+  static validatePassword(passwordParam) {
     bcrypt.compare(passwordParam, this.password, (error, isMatch) => {
-      if (error) return callback(error);
+      if (error) return false;
 
-      callback(null, isMatch);
+      return isMatch;
     });
   }
 
