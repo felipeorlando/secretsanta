@@ -1,5 +1,5 @@
 import passport from 'passport';
-import { Strategy } from 'passport-local';
+import Strategy from 'passport-local';
 import User from '../models/user';
 
 class Passport {
@@ -8,13 +8,19 @@ class Passport {
       usernameField: 'user[email]',
       passwordField: 'user[password]',
     }, (email, password, callback) => {
-      User.findByIdAndRemove({ email }).then((user) => {
-        if (!user || !user.validatePassword(password)) {
-          return callback(null, false);
-        }
+      User.findOne({ email })
+        .then((user) => {
+          if (!user) {
+            return callback(null, false, 'User param not found');
+          }
 
-        return callback(null, user);
-      }).catch(callback);
+          if (!User.validatePassword(password)) {
+            return callback(null, false, 'Wrong password');
+          }
+
+          return callback(null, user);
+        })
+        .catch(callback);
     }));
   }
 }
