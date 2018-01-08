@@ -1,4 +1,5 @@
 import User from '../models/user';
+import passport from 'passport';
 
 class UserController {
   index(req, res) {
@@ -47,6 +48,20 @@ class UserController {
         userId: user._id,
       });
     });
+  }
+
+  login(req, res, next) {
+    passport.authenticate('local', { session: false }, (error, user, message) => {
+      if (error) return res.status(422).json({ error });
+
+      if (user) {
+        user.token = user.generateJWT();
+
+        return res.json({ user: User.toAuthJSON(user) });
+      }
+
+      return res.status(422).json({ message });
+    })(req, res, next);
   }
 }
 
