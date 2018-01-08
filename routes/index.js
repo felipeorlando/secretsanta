@@ -2,7 +2,7 @@ import UserRoute from './user';
 import PersonRoute from './person';
 
 class Routes {
-  setRouteObjects() {
+  static setRouteObjects() {
     this.user = new UserRoute();
     this.person = new PersonRoute();
   }
