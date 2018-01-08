@@ -2,6 +2,7 @@ const configs = {
   app: {
     host: 'localhost',
     port: 8888,
+    jwtSecret: 'secretOfSecretSanta',
   },
 
   db: {
