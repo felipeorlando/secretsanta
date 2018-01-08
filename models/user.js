@@ -17,10 +17,19 @@ class User extends mongoose.Model {
     });
   }
 
-  async save(params, next) {
+  static generateJWT() {
+    let expireDate = new Date();
+    const oneWeekFromNow = expireDate.getDate() + 7;
+
+    expireDate.setDate(oneWeekFromNow);
+
+    return expireDate;
+  }
+
+  save(params, next) {
     this.password = this.encryptPassword(this.password);
 
-    await super.save(params, next);
+    super.save(params, next);
   }
 }
 
