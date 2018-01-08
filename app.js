@@ -14,9 +14,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(`mongodb://${configs.db.host}/${configs.db.name}`);
 
-new Passport().init();
+Passport.init();
 
-new Routes(app).registerRoutes();
+Routes.init(app);
 
 app.listen(configs.app.port, () => {
   console.log(`Server running at http://${configs.app.host}:${configs.app.port}`);

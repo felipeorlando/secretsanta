@@ -3,7 +3,7 @@ import { Strategy } from 'passport-local';
 import User from '../models/user';
 
 class Passport {
-  init() {
+  static init() {
     passport.use(new Strategy({
       usernameField: 'user[email]',
       passwordField: 'user[password]',

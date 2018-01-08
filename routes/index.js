@@ -2,13 +2,16 @@ import UserRoute from './user';
 import PersonRoute from './person';
 
 class Routes {
-  constructor(app) {
-    this.app = app;
+  setRouteObjects() {
     this.user = new UserRoute();
     this.person = new PersonRoute();
   }
 
-  registerRoutes() {
+  static init(app) {
+    this.app = app;
+
+    this.setRouteObjects();
+
     this.app.use('/users', this.user.init());
     this.app.use('/persons', this.person.init());
   }
