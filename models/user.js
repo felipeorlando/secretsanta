@@ -6,7 +6,9 @@ import configs from '../configs';
 
 class User extends mongoose.Model {
   encryptPassword(password) {
-    return bcrypt.hashSync(password, '$2a$10$KXaRXJV2BZvi3yQuOZhk8.');
+    const salt = bcrypt.genSaltSync(10);
+
+    return bcrypt.hashSync(password, salt);
   }
 
   static validatePassword(passwordParam, userPassword) {

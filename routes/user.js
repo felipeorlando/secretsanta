@@ -13,8 +13,7 @@ class UserRoute {
       .post('/', this.userController.create)
       .get('/:id', this.userController.show)
       .put('/:id', this.userController.update)
-      .delete('/:id', this.userController.delete)
-      .post('/login', this.userController.login);
+      .delete('/:id', this.userController.delete);
   }
 }
 
