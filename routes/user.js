@@ -1,5 +1,6 @@
 import express from 'express';
 import UserController from '../controllers/user';
+import AuthService from '../services/auth';
 
 class UserRoute {
   constructor() {
@@ -9,6 +10,7 @@ class UserRoute {
 
   init() {
     return this.router
+      .use(AuthService.authenticate())
       .get('/', this.userController.index)
       .post('/', this.userController.create)
       .get('/:id', this.userController.show)

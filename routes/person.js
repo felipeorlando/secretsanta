@@ -1,5 +1,6 @@
 import express from 'express';
 import PersonController from '../controllers/person';
+import AuthService from '../services/auth';
 
 class PersonRoute {
   constructor() {
@@ -9,6 +10,7 @@ class PersonRoute {
 
   init() {
     return this.router
+      .use(AuthService.authenticate())
       .get('/', this.personController.index)
       .post('/', this.personController.create)
       .get('/:id', this.personController.show)
