@@ -6,7 +6,7 @@
     "jobs/",
     "models/",
     "routes/",
-    "service/"
+    "services/"
   ],
   "ext": "js",
   "env": {
