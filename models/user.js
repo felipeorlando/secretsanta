@@ -1,32 +1,24 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
-import jwt from 'express-jwt';
+import jwt from 'jsonwebtoken';
 import UserSchema from './schemas/user';
 import configs from '../configs';
 
 class User extends mongoose.Model {
   encryptPassword(password) {
-    const salt = bcrypt.genSaltSync(10);
-
-    return bcrypt.hashSync(password, salt);
+    return bcrypt.hashSync(password, '$2a$10$KXaRXJV2BZvi3yQuOZhk8.');
   }
 
-  static validatePassword(passwordParam) {
-    const encryptedPassword = this.encryptPassword(passwordParam);
-
-    bcrypt.compare(encryptedPassword, this.password, (error, isMatch) => {
-      if (error) return false;
-
-      return isMatch;
-    });
+  static validatePassword(passwordParam, userPassword) {
+    return bcrypt.compareSync(passwordParam, userPassword);
   }
 
-  static generateJWT() {
+  static generateJWT(user) {
     const expire = this.expireToken();
 
     return jwt.sign({
-      id: this._id,
-      username: this.username,
+      id: user._id,
+      username: user.username,
       exp: parseInt(expire.getTime() / 1000),
     }, configs.app.jwtSecret);
   }
@@ -43,7 +35,7 @@ class User extends mongoose.Model {
   static toAuthJSON(user) {
     return {
       email: user.email,
-      token: user.generateJWT(),
+      token: User.generateJWT(user),
     };
   }
 

@@ -11,11 +11,11 @@ class Passport {
       User.findOne({ email })
         .then((user) => {
           if (!user) {
-            return callback(null, false, 'User param not found');
+            return callback(true, false, 'User param not found');
           }
 
-          if (!User.validatePassword(password)) {
-            return callback(null, false, 'Wrong password');
+          if (!User.validatePassword(password, user.password)) {
+            return callback(true, false, 'Wrong password');
           }
 
           return callback(null, user);

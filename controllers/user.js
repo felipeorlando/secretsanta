@@ -52,15 +52,11 @@ class UserController {
 
   login(req, res, next) {
     passport.authenticate('local', { session: false }, (error, user, message) => {
-      if (error) return res.status(422).json({ error });
+      if (error) return res.status(422).json({ error: message });
 
-      if (user) {
-        user.token = user.generateJWT();
+      user.token = User.generateJWT(user);
 
-        return res.json({ user: User.toAuthJSON(user) });
-      }
-
-      return res.status(422).json({ message });
+      return res.status(200).json({ user: User.toAuthJSON(user) });
     })(req, res, next);
   }
 }
