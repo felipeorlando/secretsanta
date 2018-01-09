@@ -1,7 +1,7 @@
 import jwt from 'express-jwt';
 import configs from '../configs';
 
-class Auth {
+class AuthService {
   static getTokenFromHeader(req) {
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Token' ||
         req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -15,9 +15,9 @@ class Auth {
     return jwt({
       secret: configs.app.jwtSecret,
       userProperty: 'payload',
-      getToken: this.getTokenFromHeader,
+      getToken: AuthService.getTokenFromHeader,
     });
   }
 }
 
-export default Auth;
+export default AuthService;
