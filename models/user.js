@@ -5,12 +5,6 @@ import UserSchema from './schemas/user';
 import configs from '../configs';
 
 class User extends mongoose.Model {
-  encryptPassword(password) {
-    const salt = bcrypt.genSaltSync(10);
-
-    return bcrypt.hashSync(password, salt);
-  }
-
   static validatePassword(passwordParam, userPassword) {
     return bcrypt.compareSync(passwordParam, userPassword);
   }
@@ -39,6 +33,12 @@ class User extends mongoose.Model {
       email: user.email,
       token: User.generateJWT(user),
     };
+  }
+
+  encryptPassword(password) {
+    const salt = bcrypt.genSaltSync(10);
+
+    return bcrypt.hashSync(password, salt);
   }
 
   save(params, next) {
