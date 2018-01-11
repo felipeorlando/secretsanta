@@ -2,27 +2,35 @@ import mongoose from 'mongoose';
 import PersonSchema from './schemas/person';
 
 class Person extends mongoose.Model {
-  static randomPerson(query) {
-    // Person.findOneRandom(query, {}, {}, (error, person) => {
-    //   console.log(error);
-    //   return person;
-    // });
-  }
-
-  static turnsMatched(person) {
+  static getFriend(person) {
     const query = {
       isMatched: false,
       _id: { $nin: [person._id, person.matchedPerson] },
     };
 
+    return new Promise((resolve) => {
+      Person.findOneRandom(query, {}, {}, (error, friend) => {
+        resolve(friend);
+      });
+    });
+  }
+
+  static turnsMatched(friend) {
+    const query = { _id: friend._id };
     const change = { $set: { isMatched: true } };
 
-    return Person.findOneAndUpdate(query, change).exec();
+    return new Promise((resolve) => {
+      Person.findOneAndUpdate(query, change, (error, friendUpdated) => {
+        resolve(friendUpdated);
+      });
+    });
   }
 
   static createRelation(person, friend) {
     const query = { _id: person._id };
     const change = { $set: { matchedPerson: friend } };
+
+    // console.log(`3 person: ${person.name} - friend: ${friend.name}`);
 
     return Person.findOneAndUpdate(query, change).exec();
   }
@@ -38,14 +46,16 @@ class Person extends mongoose.Model {
 
   static match(persons, callback) {
     const personsMap = persons.map(async (person) => {
-      await Promise.all([
-        Person.turnsMatched(person),
-      ]).then(async (results) => {
-        const friend = results[0];
-        // console.log(friend);
+      let friend = await Person.getFriend(person);
 
-        await Person.createRelation(person, friend);
-      });
+      // console.log(`1 person: ${person.name} - friend: ${friend.name}`);
+      friend = await Person.turnsMatched(friend);
+      console.log(`2 person: ${person.name}(${person.isMatched}) - friend: ${friend.name}(${friend.isMatched})`);
+      // console.log(`2 person: ${person.name} - friend: ${friend.name}`);
+
+      // console.log(friend.isMatched);
+
+      await Person.createRelation(person, friend);
     });
 
     return Promise.all(personsMap).then(callback);
