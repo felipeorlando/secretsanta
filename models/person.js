@@ -2,6 +2,13 @@ import mongoose from 'mongoose';
 import PersonSchema from './schemas/person';
 
 class Person extends mongoose.Model {
+  static randomPerson(query) {
+    // Person.findOneRandom(query, {}, {}, (error, person) => {
+    //   console.log(error);
+    //   return person;
+    // });
+  }
+
   static turnsMatched(person) {
     const query = {
       isMatched: false,
@@ -25,8 +32,8 @@ class Person extends mongoose.Model {
       isMatched: false,
       matchedPerson: null,
     };
-    
-    return Person.findOneAndUpdate({}, change).exec();
+
+    return Person.update({}, change, { multi: true }).exec();
   }
 
   static match(persons, callback) {
@@ -35,6 +42,7 @@ class Person extends mongoose.Model {
         Person.turnsMatched(person),
       ]).then(async (results) => {
         const friend = results[0];
+        // console.log(friend);
 
         await Person.createRelation(person, friend);
       });

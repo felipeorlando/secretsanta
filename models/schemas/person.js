@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
+import random from 'mongoose-simple-random';
 import EmailValidator from '../validators/email';
 
 class Schema {
   static init() {
-    return new mongoose.Schema({
+    const schema = new mongoose.Schema({
       name: {
         type: String,
         required: true,
@@ -25,6 +26,10 @@ class Schema {
         default: false,
       },
     }, { timestamps: true });
+
+    schema.plugin(random);
+
+    return schema;
   }
 }
 
