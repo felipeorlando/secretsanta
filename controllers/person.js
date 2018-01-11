@@ -50,21 +50,15 @@ class PersonController {
   }
 
   async match(req, res) {
-    const persons = await Person.find().exec();
+    await Person.dismatchAll();
 
-    persons.map(async (person) => {
-      await Promise.all([
-        Person.findOneAndUpdate({ isMatched: false, _id: { $nin: [person._id, person.matchedPerson] } }, { $set: { isMatched: true } }).exec()
-      ]).then(async (results) => {
-        const friend = results[0];
+    const allPersons = await Person.find().exec();
 
-        await Person.findOneAndUpdate({ _id: person._id }, { $set: { matchedPerson: friend } }).exec();
-      });
+    Person.match(allPersons, async () => {
+      const persons = await Person.find().exec();
+
+      res.status(200).json({ persons });
     });
-
-    const updatedPersons = await Person.find().exec();
-
-    res.status(200).json({ persons: updatedPersons });
   }
 }
 
