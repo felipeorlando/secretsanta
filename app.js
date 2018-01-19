@@ -5,6 +5,7 @@ import logger from 'morgan';
 import Passport from './configs/passport';
 import configs from './configs';
 import Routes from './routes';
+import Person from './models/person';
 
 const app = express();
 
@@ -20,4 +21,5 @@ Routes.init(app);
 
 app.listen(configs.app.port, () => {
   console.log(`Server running at http://${configs.app.host}:${configs.app.port}`);
+  Person.matchAll();
 });

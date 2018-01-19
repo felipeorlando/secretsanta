@@ -16,6 +16,7 @@
   "author": "Felipe Orlando",
   "dependencies": {
     "@std/esm": "^0.18.0",
+    "async": "^2.6.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
@@ -26,7 +27,8 @@
     "morgan": "^1.9.0",
     "node-resque": "^5.1.0",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "babel-eslint": "^8.1.2",

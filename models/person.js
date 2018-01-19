@@ -1,64 +1,63 @@
 import mongoose from 'mongoose';
+import async from 'async';
+import _ from 'underscore';
 import PersonSchema from './schemas/person';
 
+let allPersons = [];
+
 class Person extends mongoose.Model {
-  static getFriend(person) {
-    const query = {
-      isMatched: false,
-      _id: { $nin: [person._id, person.matchedPerson] },
-    };
+  static async matchAll() {
+    const persons = await Person.getAll();
+    const resetedPersons = await Person.resetAll(persons);
+    const matcheds = await Person.match(resetedPersons);
 
+
+    console.log('________________________________________________ done!');
+    // async.waterfall([
+    //   (done) => Person.getAll(done),
+    //   (persons, done) => Person.resetAll(persons, done),
+    //   (persons, done) => {
+    //     console.log(persons);
+    //   },
+    // ], (done) => {
+    //   console.log('done!');
+    // });
+  }
+
+  static getAll() {
+    return Person.find().exec();
+  }
+
+  static resetAll(persons) {
     return new Promise((resolve) => {
-      Person.findOneRandom(query, {}, {}, (error, friend) => {
-        resolve(friend);
+      persons.map((person) => {
+        person.isMatched = false;
+        person.matchedPerson = null;
       });
+
+      resolve(persons);
     });
   }
 
-  static turnsMatched(friend) {
-    const query = { _id: friend._id };
-    const change = { $set: { isMatched: true } };
-
+  static match(persons) {
     return new Promise((resolve) => {
-      Person.findOneAndUpdate(query, change, (error, friendUpdated) => {
-        resolve(friendUpdated);
+      const newPersons = persons;
+
+      persons.map((person, index) => {
+        const friend = newPersons.filter((candidate) => {
+          return candidate.isMatched === false && candidate._id !== person._id;
+        })[0];
+
+        console.log(friend);
+
+        // console.log(friend);
+        console.log('-----------------');
+
+        // newPersons[index].matchedPerson = friend._id;
       });
+  
+      resolve(newPersons);
     });
-  }
-
-  static createRelation(person, friend) {
-    const query = { _id: person._id };
-    const change = { $set: { matchedPerson: friend } };
-
-    // console.log(`3 person: ${person.name} - friend: ${friend.name}`);
-
-    return Person.findOneAndUpdate(query, change).exec();
-  }
-
-  static dismatchAll() {
-    const change = {
-      isMatched: false,
-      matchedPerson: null,
-    };
-
-    return Person.update({}, change, { multi: true }).exec();
-  }
-
-  static match(persons, callback) {
-    const personsMap = persons.map(async (person) => {
-      let friend = await Person.getFriend(person);
-
-      // console.log(`1 person: ${person.name} - friend: ${friend.name}`);
-      friend = await Person.turnsMatched(friend);
-      console.log(`2 person: ${person.name}(${person.isMatched}) - friend: ${friend.name}(${friend.isMatched})`);
-      // console.log(`2 person: ${person.name} - friend: ${friend.name}`);
-
-      // console.log(friend.isMatched);
-
-      await Person.createRelation(person, friend);
-    });
-
-    return Promise.all(personsMap).then(callback);
   }
 }
 

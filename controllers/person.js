@@ -49,16 +49,8 @@ class PersonController {
     });
   }
 
-  async match(req, res) {
-    await Person.dismatchAll();
-
-    const allPersons = await Person.find().exec();
-
-    Person.match(allPersons, async () => {
-      const persons = await Person.find().exec();
-
-      res.status(200).json({ persons });
-    });
+  match(req, res) {
+    // 
   }
 }
 
