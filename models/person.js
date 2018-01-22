@@ -1,14 +1,15 @@
 import mongoose from 'mongoose';
+import async from 'async';
 import PersonSchema from './schemas/person';
 import Shuffle from '../lib/shuffle';
 
 class Person extends mongoose.Model {
-  static async matchAll() {
+  static async matchAll(callback) {
     const persons = await Person.getAll();
     const resetedPersons = await Person.resetAll(persons);
     const matcheds = await Person.match(resetedPersons);
 
-    matcheds.map((person) => {
+    const updates = matcheds.map((person) => {
       const query = {
         _id: person._id,
       };
@@ -18,8 +19,10 @@ class Person extends mongoose.Model {
         matchedPerson: person.matchedPerson,
       };
 
-      Person.update(query, update);
+      return Person.update(query, update);
     });
+
+    return Promise.all(updates);
   }
 
   static getAll() {
