@@ -16,7 +16,7 @@ class Schema {
         required: true,
         validate: [EmailValidator.format, 'Please fill a valid email address'],
       },
-      matchedPerson: {
+      friend: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Person',
         default: null,

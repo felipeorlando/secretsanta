@@ -16,7 +16,7 @@ class Person extends mongoose.Model {
 
       const update = {
         isMatched: true,
-        matchedPerson: person.matchedPerson,
+        friend: person.friend,
       };
 
       return Person.update(query, update);
@@ -33,7 +33,7 @@ class Person extends mongoose.Model {
     return new Promise((resolve) => {
       persons.map((person) => {
         person.isMatched = false;
-        person.matchedPerson = null;
+        person.friend = null;
       });
 
       resolve(persons);
@@ -51,7 +51,7 @@ class Person extends mongoose.Model {
 
           if (Person.checkConditionals(person, candidate)) {
             candidates[i].isMatched = true;
-            person.matchedPerson = candidates[i]._id;
+            person.friend = candidates[i]._id;
             break;
           }
         }
@@ -76,7 +76,7 @@ class Person extends mongoose.Model {
   }
 
   static noPanelinha(person, candidate) {
-    return candidate.matchedPerson !== person._id;
+    return candidate.friend !== person._id;
   }
 }
 
