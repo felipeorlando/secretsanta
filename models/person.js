@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import PersonSchema from './schemas/person';
+import Shuffle from '../lib/shuffle';
 
 class Person extends mongoose.Model {
   static async matchAll() {
@@ -8,7 +9,16 @@ class Person extends mongoose.Model {
     const matcheds = await Person.match(resetedPersons);
 
     matcheds.map((person) => {
-      // console.log(`${person._id} - ${person.matchedPerson}`);
+      const query = {
+        _id: person._id,
+      };
+
+      const update = {
+        isMatched: true,
+        matchedPerson: person.matchedPerson,
+      };
+
+      Person.update(query, update);
     });
   }
 
@@ -29,15 +39,15 @@ class Person extends mongoose.Model {
 
   static match(persons) {
     return new Promise((resolve) => {
-      const candidates = persons;
+      const candidates = Shuffle.now(persons);
       const candidatesSize = candidates.length;
 
       persons.map((person) => {
         for (let i = 0; i < candidatesSize; i++) {
-          if (candidates[i]._id !== person._id && candidates[i].matchedPerson !== person._id && candidates[i].isMatched === false) {
+          const candidate = candidates[i];
+          if (Person.checkConditionals(person, candidate)) {
             candidates[i].isMatched = true;
             person.matchedPerson = candidates[i]._id;
-            console.log(`${person.name} - ${candidates[i].name}`);
             break;
           }
         }
@@ -47,8 +57,22 @@ class Person extends mongoose.Model {
     });
   }
 
-  static findFriend(person) {
-    //
+  static checkConditionals(person, candidate) {
+    return Person.differentIDs(person, candidate) &&
+      Person.friendNotMatched(person, candidate) &&
+      Person.noPanelinha(person, candidate);
+  }
+
+  static differentIDs(person, candidate) {
+    return candidate._id !== person._id;
+  }
+
+  static friendNotMatched(person, candidate) {
+    return candidate.isMatched === false;
+  }
+
+  static noPanelinha(person, candidate) {
+    return candidate.matchedPerson !== person._id;
   }
 }
 
