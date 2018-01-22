@@ -50,7 +50,11 @@ class PersonController {
   }
 
   match(req, res) {
-    // 
+    Person.matchAll().then(() => {
+      Person.find({}, (error, persons) => {
+        res.status(200).json({ persons });
+      });
+    });
   }
 }
 

@@ -21,5 +21,4 @@ Routes.init(app);
 
 app.listen(configs.app.port, () => {
   console.log(`Server running at http://${configs.app.host}:${configs.app.port}`);
-  Person.matchAll();
 });

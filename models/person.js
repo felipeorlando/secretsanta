@@ -4,7 +4,7 @@ import PersonSchema from './schemas/person';
 import Shuffle from '../lib/shuffle';
 
 class Person extends mongoose.Model {
-  static async matchAll(callback) {
+  static async matchAll() {
     const persons = await Person.getAll();
     const resetedPersons = await Person.resetAll(persons);
     const matcheds = await Person.match(resetedPersons);
@@ -48,6 +48,7 @@ class Person extends mongoose.Model {
       persons.map((person) => {
         for (let i = 0; i < candidatesSize; i++) {
           const candidate = candidates[i];
+
           if (Person.checkConditionals(person, candidate)) {
             candidates[i].isMatched = true;
             person.matchedPerson = candidates[i]._id;
