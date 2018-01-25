@@ -5,7 +5,7 @@ import logger from 'morgan';
 import Passport from './configs/passport';
 import configs from './configs';
 import Routes from './routes';
-import Person from './models/person';
+import HttpErrorHelper from './lib/http-error-helper';
 
 const app = express();
 
@@ -19,9 +19,7 @@ Passport.init();
 
 Routes.init(app);
 
-app.use((error, req, res) => {
-  // 
-});
+HttpErrorHelper.init(app);
 
 app.listen(configs.app.port, () => {
   console.log(`Server running at http://${configs.app.host}:${configs.app.port}`);

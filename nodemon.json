@@ -1,9 +1,11 @@
 {
   "verbose": true,
   "watch": [
+    "app.js",
     "configs/",
     "controllers/",
     "jobs/",
+    "lib/",
     "models/",
     "routes/",
     "services/"
