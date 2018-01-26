@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import async from 'async';
 import PersonSchema from './schemas/person';
 import Shuffle from '../lib/shuffle';
 
