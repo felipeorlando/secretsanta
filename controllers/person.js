@@ -1,4 +1,5 @@
 import Person from '../models/person';
+import Jobs from '../jobs';
 
 class PersonController {
   index(req, res) {
@@ -50,11 +51,14 @@ class PersonController {
   }
 
   match(req, res) {
-    Person.matchAll().then(() => {
-      Person.find({}, (error, persons) => {
-        res.status(200).json({ persons });
-      });
-    });
+    const job = {
+      status: 'Jobs is queued',
+      success: true,
+    };
+
+    Jobs.enqueue('matches', 'match');
+
+    res.status(200).json({ job });
   }
 }
 

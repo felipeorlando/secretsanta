@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import logger from 'morgan';
 import Passport from './configs/passport';
 import configs from './configs';
+import Jobs from './jobs';
 import Routes from './routes';
 import HttpErrorHelper from './lib/http-error-helper';
 
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(`mongodb://${configs.db.host}/${configs.db.name}`);
+
+Jobs.init();
 
 Passport.init();
 
