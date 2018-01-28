@@ -1,5 +1,5 @@
 import Person from '../models/person';
-import Jobs from '../jobs';
+import Jobs from '../lib/jobs';
 
 class PersonController {
   index(req, res) {

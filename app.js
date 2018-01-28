@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import logger from 'morgan';
 import Passport from './configs/passport';
 import configs from './configs';
-import Jobs from './jobs';
+import Jobs from './lib/jobs';
 import Routes from './routes';
 import HttpErrorHelper from './lib/http-error-helper';
 
