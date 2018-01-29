@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import PersonSchema from './schemas/person';
 import Shuffle from '../lib/shuffle';
+// import Mailer from '../lib/mailer';
 
 class Person extends mongoose.Model {
   static async matchAll() {

@@ -2,6 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import logger from 'morgan';
+import fs from 'fs';
+import Handlebars from 'handlebars';
 import Passport from './configs/passport';
 import configs from './configs';
 import Jobs from './lib/jobs';
@@ -25,7 +27,19 @@ Routes.init(app);
 
 HttpErrorHelper.init(app);
 
-new Mailer().send();
+const source = fs.readFileSync('./public/templates/matcher.html', 'utf8');
+const template = Handlebars.compile(source);
+
+const result = template({
+  name: 'Felipe',
+  friend: 'Maria',
+});
+
+Mailer.send({
+  to: 'fobsouza@gmail.com',
+  subject: 'Yo!',
+  html: result,
+});
 
 app.listen(configs.app.port, () => {
   console.log(`Server running at http://${configs.app.host}:${configs.app.port}`);
