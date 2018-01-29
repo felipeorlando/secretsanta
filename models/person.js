@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
+import fs from 'fs';
+import Handlebars from 'handlebars';
 import PersonSchema from './schemas/person';
 import Shuffle from '../lib/shuffle';
-// import Mailer from '../lib/mailer';
+import Mailer from '../lib/mailer';
 
 class Person extends mongoose.Model {
   static async matchAll() {
@@ -50,14 +52,34 @@ class Person extends mongoose.Model {
           const candidate = candidates[i];
 
           if (Person.checkConditionals(person, candidate)) {
+            const friend = candidates[i];
+
             candidates[i].isMatched = true;
-            person.friend = candidates[i]._id;
+            person.friend = friend._id;
+            // console.log(`${person.name} - ${friend.name}`);
+            // Person.sendMail(person, friend);
             break;
           }
         }
       });
 
       resolve(persons);
+    });
+  }
+
+  static sendMail(person, friend) {
+    const source = fs.readFileSync('../public/templates/matcher.html', 'utf8');
+    const template = Handlebars.compile(source);
+
+    const result = template({
+      name: person.name,
+      friend: friend.name,
+    });
+
+    Mailer.send({
+      to: friend.email,
+      subject: 'Seu amigo secreto é...',
+      html: result,
     });
   }
 
