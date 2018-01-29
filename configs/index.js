@@ -19,6 +19,11 @@ const configs = {
     port: 6379,
     database: 0,
   },
+
+  mailgun: {
+    username: 'api',
+    key: 'key-631206f8f40de90f784d37a8dadb953a',
+  },
 };
 
 export default configs;

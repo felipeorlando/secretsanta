@@ -7,6 +7,7 @@ import configs from './configs';
 import Jobs from './lib/jobs';
 import Routes from './routes';
 import HttpErrorHelper from './lib/http-error-helper';
+import Mailer from './lib/mailer';
 
 const app = express();
 
@@ -23,6 +24,8 @@ Passport.init();
 Routes.init(app);
 
 HttpErrorHelper.init(app);
+
+new Mailer().send();
 
 app.listen(configs.app.port, () => {
   console.log(`Server running at http://${configs.app.host}:${configs.app.port}`);
