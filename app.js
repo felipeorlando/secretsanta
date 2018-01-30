@@ -7,7 +7,6 @@ import configs from './configs';
 import Jobs from './lib/jobs';
 import Routes from './routes';
 import HttpErrorHelper from './lib/http-error-helper';
-import Mailer from './lib/mailer';
 
 const app = express();
 

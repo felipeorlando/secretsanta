@@ -56,8 +56,9 @@ class Person extends mongoose.Model {
 
             candidates[i].isMatched = true;
             person.friend = friend._id;
-            // console.log(`${person.name} - ${friend.name}`);
-            // Person.sendMail(person, friend);
+
+            Person.sendMail(person, friend);
+
             break;
           }
         }
@@ -68,7 +69,10 @@ class Person extends mongoose.Model {
   }
 
   static sendMail(person, friend) {
-    const source = fs.readFileSync('../public/templates/matcher.html', 'utf8');
+    const appDir = fs.realpathSync('.');
+    const templateFile = `${appDir}/public/templates/matcher.html`;
+
+    const source = fs.readFileSync(templateFile, 'utf8');
     const template = Handlebars.compile(source);
 
     const result = template({
@@ -77,7 +81,7 @@ class Person extends mongoose.Model {
     });
 
     Mailer.send({
-      to: friend.email,
+      to: person.email,
       subject: 'Seu amigo secreto é...',
       html: result,
     });
