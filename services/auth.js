@@ -3,8 +3,7 @@ import configs from '../configs';
 
 class AuthService {
   static getTokenFromHeader(req) {
-    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Token' ||
-        req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
       return req.headers.authorization.split(' ')[1];
     }
 

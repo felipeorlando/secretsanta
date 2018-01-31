@@ -20,7 +20,7 @@ class User extends mongoose.Model {
   }
 
   static expireToken() {
-    let expireDate = new Date();
+    const expireDate = new Date();
     const oneWeekFromNow = expireDate.getDate() + 7;
 
     expireDate.setDate(oneWeekFromNow);

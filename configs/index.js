@@ -22,7 +22,7 @@ const configs = {
 
   mailgun: {
     username: 'api',
-    key: 'key-631206f8f40de90f784d37a8dadb953a',
+    key: 'key-5f2d55ebbd5c877154be4df39be0e4ed',
   },
 };
 
