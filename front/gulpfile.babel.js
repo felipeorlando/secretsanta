@@ -107,8 +107,7 @@ gulp.task('files', function () {
   'use strict';
 
   var entries = [
-    ['node_modules/gaiden/dist/gaiden.min.css'],
-    ['node_modules/gaiden/src/scss/settings/_banner.scss', 'gaiden/settings/_banner.scss'],
+    ['node_modules/material-components-web/dist/material-components-web.min.css'],
   ];
 
   for (var i = 0; i < entries.length; i++) {
