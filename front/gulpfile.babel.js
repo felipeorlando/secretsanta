@@ -98,9 +98,28 @@ gulp.task('watch', ['serve']);
 
 gulp.task('clean', (cb) => {
   del([paths.dest]).then(function (paths) {
-    gutil.log("[clean]", paths);
+    gutil.log('[clean]', paths);
     cb();
   })
+});
+
+gulp.task('files', function () {
+  'use strict';
+
+  var entries = [
+    ['node_modules/gaiden/dist/gaiden.min.css'],
+    ['node_modules/gaiden/src/scss/settings/_banner.scss', 'gaiden/settings/_banner.scss'],
+  ];
+
+  for (var i = 0; i < entries.length; i++) {
+    var file = entries[i][0];
+    var filename = entries[i][1] || file.split('/').pop();
+
+    gulp
+      .src(file)
+      .pipe(rename(filename))
+      .pipe(gulp.dest('src/assets/stylesheets/vendor'));
+  }
 });
 
 gulp.task('default', ['watch']);
