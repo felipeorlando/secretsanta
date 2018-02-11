@@ -1,13 +1,12 @@
 {
-  "name": "ng6-starter",
+  "name": "secret-santa",
   "version": "0.0.1",
-  "description": "Starter for Angular + ES6 + (Webpack or JSPM)",
+  "description": "SecretSanta Client",
   "main": "index.js",
   "dependencies": {
     "angular": "^1.5.0",
     "angular-ui-router": "^1.0.0-beta.1",
     "material-components-web": "^0.30.0",
-    "materialize-css": "^0.100.2",
     "normalize.css": "^3.0.3"
   },
   "devDependencies": {
@@ -55,7 +54,6 @@
   },
   "scripts": {
     "build": "gulp webpack",
-    "component": "gulp component",
     "serve": "gulp serve",
     "start": "gulp serve",
     "test": "karma start",
