@@ -103,4 +103,48 @@ gulp.task('clean', (cb) => {
   })
 });
 
+gulp.task('files', function () {
+  'use strict';
+
+  var entries = [
+    ['node_modules/angular-material/angular-material.min.css'],
+  ];
+
+  function dest(filename) {
+    if (/\.(css|sass|scss)$/.test(filename)) {
+      return 'src/assets/stylesheets/vendor';
+    }
+
+    if (/\.(js)$/.test(filename)) {
+      return 'src/assets/javascripts/vendor';
+    }
+  }
+
+  for (var i = 0; i < entries.length; i++) {
+    var file = entries[i][0];
+    var filename = entries[i][1] || file.split('/').pop();
+
+    gulp
+      .src(file)
+      .pipe(rename(filename))
+      .pipe(gulp.dest(dest(filename)));
+  }
+});
+
+gulp.task('material-icons', function() {
+  var replaceAll = function(haystack, needle, replacement) {
+    return haystack.split(needle).join(replacement);
+  };
+
+  return gulp
+    .src('node_modules/material-design-icons/**/svg/production/*24px.svg')
+    .pipe(rename(function(p) {
+        p.dirname = p.dirname.replace(path.normalize('svg/production'), '')
+        p.basename = p.basename.split('_24px')[0]
+        p.basename = replaceAll(p.basename, '_', '-')
+        p.basename = replaceAll(p.basename, 'ic-', '')
+    }))
+    .pipe(gulp.dest('src/assets/icons'))
+});
+
 gulp.task('default', ['watch']);

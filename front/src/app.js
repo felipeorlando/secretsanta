@@ -1,5 +1,8 @@
 import angular from 'angular';
 
+import 'angular-animate';
+import 'angular-aria';
+import 'angular-material';
 import 'angular-ui-router';
 
 import AppConstants from './config/app.constants';
@@ -12,6 +15,7 @@ import './modules/login';
 
 const requires = [
   'ui.router',
+  'ngMaterial',
   'app.layout',
   'app.home',
   'app.login',
