@@ -103,22 +103,4 @@ gulp.task('clean', (cb) => {
   })
 });
 
-gulp.task('files', function () {
-  'use strict';
-
-  var entries = [
-    ['node_modules/material-components-web/dist/material-components-web.min.css'],
-  ];
-
-  for (var i = 0; i < entries.length; i++) {
-    var file = entries[i][0];
-    var filename = entries[i][1] || file.split('/').pop();
-
-    gulp
-      .src(file)
-      .pipe(rename(filename))
-      .pipe(gulp.dest('src/assets/stylesheets/vendor'));
-  }
-});
-
 gulp.task('default', ['watch']);
