@@ -1,5 +1,9 @@
 <app-header></app-header>
 
-<div class="app">
-  <div ui-view></div>
+<div flex layout="row">
+  <app-sidenav></app-sidenav>
+
+  <md-content flex id="content">
+    <div ui-view></div>
+  </md-content>
 </div>

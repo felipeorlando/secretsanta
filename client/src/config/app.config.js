@@ -4,6 +4,7 @@ function AppConfig(
   $locationProvider,
   $stateProvider,
   $urlRouterProvider,
+  $mdIconProvider,
   $mdThemingProvider
 ) {
   'ngInject';
@@ -17,9 +18,12 @@ function AppConfig(
 
   $urlRouterProvider.otherwise('/');
 
+  $mdIconProvider
+    .icon('menu', '../assets/icons/navigation/menu.svg', 24);
+
   $mdThemingProvider
     .theme('default')
-    .primaryPalette('red')
+    .primaryPalette('red', { default: '700' })
     .accentPalette('green');
 }
 
