@@ -12,6 +12,8 @@ import AppRun from './config/app.run';
 import './layout';
 import './modules/home';
 import './modules/login';
+import './modules/users';
+import './modules/persons';
 
 const requires = [
   'ui.router',
@@ -19,6 +21,8 @@ const requires = [
   'app.layout',
   'app.home',
   'app.login',
+  'app.users',
+  'app.persons',
 ];
 
 angular

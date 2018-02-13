@@ -1,17 +1,24 @@
 import template from '../templates/header.html';
 
-class AppHeaderControl {
-  constructor(AppConstants, $scope) {
+class AppHeaderController {
+  constructor(AppConstants, $mdSidenav, $scope) {
     'ngInject';
 
     this.appName = AppConstants.appName;
-    // this.currentUser = User.current;
+    this.toggleList = () => {
+      return $mdSidenav('left').toggle();
+    };
+  }
+
+  toggleList() {
+    $mdSidenav('left').toggle();
   }
 }
 
 const AppHeader = {
-  controller: AppHeaderControl,
-  template,
+  controller: AppHeaderController,
+  controllerAs: '$headerCtrl',
+  template
 };
 
 export default AppHeader;

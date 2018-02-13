@@ -1,6 +1,6 @@
 import template from '../templates/sidenav.html';
 
-class AppSidenavControl {
+class AppSidenavController {
   constructor(AppConstants, $scope) {
     'ngInject';
 
@@ -9,7 +9,8 @@ class AppSidenavControl {
 }
 
 const AppSidenav = {
-  controller: AppSidenavControl,
+  controller: AppSidenavController,
+  controllerAs: '$sidenavCtrl',
   template,
 };
 
