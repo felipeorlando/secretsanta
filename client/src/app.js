@@ -1,3 +1,5 @@
+import './assets/stylesheets/main.scss';
+
 import angular from 'angular';
 
 import 'angular-animate';
@@ -11,7 +13,7 @@ import AppRun from './config/app.run';
 
 import './layout';
 import './modules/home';
-import './modules/login';
+import './modules/auth';
 import './modules/users';
 import './modules/persons';
 
@@ -20,7 +22,7 @@ const requires = [
   'ngMaterial',
   'app.layout',
   'app.home',
-  'app.login',
+  'app.auth',
   'app.users',
   'app.persons',
 ];

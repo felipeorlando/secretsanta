@@ -1,7 +1,22 @@
-<md-list>
-  <md-list-item ng-repeat="user in $usersCtrl.users">
-    <md-button>
-      {{user.name}}
-    </md-button>
+<h1 class="md-display-2">Users</h1>
+
+<md-list flex>
+  <md-list-item class="md-2-line md-with-secondary" ng-repeat="user in $usersCtrl.users" ng-click="null">
+    <div class="md-list-item-text" layout="column">
+      <h3>{{ user.name }}</h3>
+      <h4>{{ user.email }}</h4>
+    </div>
+
+    <div class="md-secondary-container">
+      <md-button md-no-ink class="md-secondary md-icon-button md-button ng-scope md-ink-ripple">
+        <md-icon md-svg-icon="mode-edit" ng-click=""></md-icon>
+      </md-button>
+    </div>
+
+    <div class="md-secondary-container">
+      <md-button md-no-ink class="md-secondary md-icon-button md-button ng-scope md-ink-ripple">
+        <md-icon md-svg-icon="delete" ng-click=""></md-icon>
+      </md-button>
+    </div>
   </md-list-item>
 </md-list>

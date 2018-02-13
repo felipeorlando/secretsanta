@@ -9,10 +9,6 @@ class AppHeaderController {
       return $mdSidenav('left').toggle();
     };
   }
-
-  toggleList() {
-    $mdSidenav('left').toggle();
-  }
 }
 
 const AppHeader = {

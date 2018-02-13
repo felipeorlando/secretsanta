@@ -2,4 +2,11 @@
   <md-toolbar>
     <h1 class="md-toolbar-tools">{{$sidenavCtrl.appName}}</h1>
   </md-toolbar>
+
+  <a ui-sref="{{item.route}}" ng-click="$sidenavCtrl.toggleList()" ng-repeat="item in $sidenavCtrl.menu">
+    <md-button md-no-ink class="md-primary sidenav__button">
+      <md-icon md-svg-icon="{{item.icon}}" ng-click=""></md-icon>
+      {{item.title}}
+    </md-button>
+  </a>
 </md-sidenav>
