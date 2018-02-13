@@ -1,6 +1,7 @@
 import angular from 'angular';
 import PersonsController from '../controllers/persons';
 import listTemplate from '../templates/persons.html';
+import newTemplate from "../templates/persons.new.html";
 import editTemplate from '../templates/persons.edit.html';
 
 let personsModule = angular.module('app.persons', []);
@@ -16,6 +17,13 @@ personsModule.config(($stateProvider) => {
       controller: 'PersonsController',
       controllerAs: '$personsCtrl',
       template: listTemplate,
+      title: 'Persons'
+    })
+    .state('app.personsNew', {
+      url: '/persons/new',
+      controller: 'PersonsController',
+      controllerAs: '$personsCtrl',
+      template: newTemplate,
       title: 'Persons'
     })
     .state('app.personsEdit', {
