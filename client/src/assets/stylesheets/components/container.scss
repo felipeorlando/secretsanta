@@ -1,5 +1,7 @@
 .container {
+  box-sizing: border-box;
   margin: 0 auto;
   max-width: 560px;
+  padding: 0 30px;
   width: 100%;
 }
