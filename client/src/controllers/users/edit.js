@@ -24,7 +24,6 @@ class UserEditController {
         $mdToast.show($mdToast.newUser());
       });
     };
-
   }
 }
 

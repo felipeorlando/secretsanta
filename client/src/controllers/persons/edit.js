@@ -9,6 +9,15 @@ class PersonEditController {
         this.person = res.data.person;
       }
     });
+
+    this.update = () => {
+      const person = this.person;
+
+      Person.update(this.id, { person }).then(res => {
+        $location.path('/persons');
+        $mdToast.show($mdToast.newUser());
+      });
+    };
   }
 }
 
