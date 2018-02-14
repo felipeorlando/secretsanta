@@ -1,5 +1,6 @@
 import angular from 'angular';
 import UsersController from '../controllers/users';
+import UsersEditController from '../controllers/users/edit';
 import listTemplate from "../templates/users.html";
 import newTemplate from '../templates/users.new.html';
 import editTemplate from '../templates/users.edit.html';
@@ -7,6 +8,7 @@ import editTemplate from '../templates/users.edit.html';
 let usersModule = angular.module('app.users', []);
 
 usersModule.controller('UsersController', UsersController);
+usersModule.controller('UsersEditController', UsersEditController);
 
 usersModule.config(($stateProvider) => {
   'ngInject';
@@ -28,8 +30,8 @@ usersModule.config(($stateProvider) => {
     })
     .state('app.usersEdit', {
       url: '/users/:id/edit',
-      controller: 'UsersController',
-      controllerAs: '$usersCtrl',
+      controller: 'UsersEditController',
+      controllerAs: '$userCtrl',
       template: editTemplate,
       title: 'Users'
     });
