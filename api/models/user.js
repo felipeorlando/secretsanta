@@ -35,6 +35,12 @@ class User extends mongoose.Model {
     };
   }
 
+  static setPassword(password) {
+    const salt = bcrypt.genSaltSync(10);
+
+    return bcrypt.hashSync(password, salt);
+  }
+
   encryptPassword(password) {
     const salt = bcrypt.genSaltSync(10);
 

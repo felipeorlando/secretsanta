@@ -31,6 +31,11 @@ class UserController {
     const params = req.body.user;
     const userId = req.params.id;
 
+    if (typeof params.password !== 'undefined') {
+      const password = User.setPassword(params.password);
+      req.body.user.password = password;
+    }
+
     User.findByIdAndUpdate(userId, { $set: params }, { new: true }, (error, user) => {
       if (error) return res.status(200).json({ error });
 
