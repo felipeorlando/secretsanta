@@ -5,7 +5,8 @@ function AppConfig(
   $stateProvider,
   $urlRouterProvider,
   $mdIconProvider,
-  $mdThemingProvider
+  $mdThemingProvider,
+  $mdToastProvider,
 ) {
   'ngInject';
 
@@ -31,6 +32,19 @@ function AppConfig(
     .theme('default')
     .primaryPalette('red', { default: '700' })
     .accentPalette('green');
+
+  $mdToastProvider.addPreset('newUser', {
+    options: function() {
+      return {
+        template:
+          '<md-toast>' +
+          '<span class="md-toast-text" flex>User created succesfully!</span>' +
+          '</md-toast>',
+        controllerAs: '$toast',
+        bindToController: true
+      };
+    }
+  });
 }
 
 export default AppConfig;
