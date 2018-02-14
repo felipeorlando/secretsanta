@@ -12,6 +12,7 @@ import AppConfig from './config/app.config';
 import AppRun from './config/app.run';
 
 import './layout';
+import './services';
 import './modules/home';
 import './modules/auth';
 import './modules/users';
@@ -25,6 +26,7 @@ const requires = [
   'app.auth',
   'app.users',
   'app.persons',
+  'app.services',
 ];
 
 angular

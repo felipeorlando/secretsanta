@@ -1,12 +1,12 @@
 class PersonsController {
-  constructor($scope) {
+  constructor(Person, $scope) {
     'ngInject';
 
-    this.persons = [
-      {name: 'Felipe', email: 'fobsouza@gmail.com'},
-      {name: 'Orlando', email: 'fobsouza@gmail.com'},
-      {name: 'Maria', email: 'fobsouza@gmail.com'},
-    ];
+    const self = this;
+
+    Person.all().then(res => {
+      this.persons = res.data.persons;
+    });
   }
 }
 
