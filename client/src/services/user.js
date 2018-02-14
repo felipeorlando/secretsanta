@@ -1,6 +1,6 @@
 class UserService {
   constructor(AppConstants, $http) {
-    'ngInject';
+    "ngInject";
 
     this.api = AppConstants.api;
     this.http = $http;
@@ -20,6 +20,10 @@ class UserService {
 
   update(id, params) {
     return this.http.put(`${this.api}/users/${id}`, params);
+  }
+
+  destroy(id) {
+    return this.http.delete(`${this.api}/users/${id}`);
   }
 }
 

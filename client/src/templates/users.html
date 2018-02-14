@@ -1,7 +1,13 @@
-<h1 class="md-display-2">Users</h1>
+<div layout="row" layout-align="space-between center">
+  <h1 class="md-display-2">Users</h1>
+
+  <a ui-sref="app.usersNew" md-no-ink class="md-button md-secondary">
+    Add User
+  </a>
+</div>
 
 <md-list flex>
-  <md-list-item class="md-2-line md-with-secondary" ng-repeat="user in $usersCtrl.users" ng-click="null">
+  <md-list-item class="md-2-line md-with-secondary" ng-repeat="user in $usersCtrl.users">
     <div class="md-list-item-text" layout="column">
       <h3>{{ user.name }}</h3>
       <h4>{{ user.email }}</h4>
@@ -9,11 +15,11 @@
 
     <div class="md-secondary-container">
       <a ui-sref="app.usersEdit({id: user._id})" md-no-ink class="md-secondary md-icon-button md-button ng-scope md-ink-ripple">
-        <md-icon md-svg-icon="mode-edit" ng-click=""></md-icon>
+        <md-icon md-svg-icon="mode-edit"></md-icon>
       </a>
 
-      <md-button md-no-ink class="md-secondary md-icon-button md-button ng-scope md-ink-ripple">
-        <md-icon md-svg-icon="delete" ng-click=""></md-icon>
+      <md-button ng-show="$usersCtrl.users.length > 1" ng-click="$usersCtrl.destroy(user._id)" md-no-ink class="md-secondary md-icon-button md-button ng-scope md-ink-ripple">
+        <md-icon md-svg-icon="delete"></md-icon>
       </md-button>
     </div>
   </md-list-item>

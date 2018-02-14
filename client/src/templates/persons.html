@@ -1,7 +1,17 @@
-<h1 class="md-display-2">Persons</h1>
+<div layout="row" layout-align="space-between center">
+  <h1 class="md-display-2">Persons</h1>
 
-<md-list flex>
-  <md-list-item class="md-3-line md-with-secondary" ng-repeat="person in $personsCtrl.persons" ng-click="null">
+  <a ui-sref="app.personsNew" md-no-ink class="md-button md-secondary">
+    Add Person
+  </a>
+</div>
+
+<div ng-hide="$personsCtrl.persons.length" layout="row" layout-align="center center">
+  <h2 class="md-display-1">There is no person 😕</h2>
+</div>
+
+<md-list ng-show="$personsCtrl.persons.length" flex>
+  <md-list-item class="md-3-line md-with-secondary" ng-repeat="person in $personsCtrl.persons">
     <div class="md-list-item-text" layout="column">
       <h3>{{ person.name }}</h3>
       <h4>{{ person.email }}</h4>
