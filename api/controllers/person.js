@@ -40,7 +40,7 @@ class PersonController {
   }
 
   delete(req, res) {
-    Person.findOneAndRemove(req.params.id, (error, person) => {
+    Person.findByIdAndRemove(req.params.id, (error, person) => {
       if (error) res.status(404).json({ error });
 
       res.status(200).json({

@@ -39,7 +39,7 @@ class UserController {
   }
 
   delete(req, res) {
-    User.findOneAndRemove(req.params.id, (error, user) => {
+    User.findByIdAndRemove(req.params.id, (error, user) => {
       if (error) res.status(404).json({ error });
 
       res.status(200).json({
