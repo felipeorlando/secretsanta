@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
+import User from '../user';
 import EmailValidator from '../validators/email';
 
 class Schema {
   static init() {
-    return new mongoose.Schema({
+    const schema = new mongoose.Schema({
       name: {
         type: String,
         required: true,
@@ -20,6 +21,22 @@ class Schema {
         required: true,
       },
     }, { timestamps: true });
+
+    schema.pre('findOneAndUpdate', function (next) {
+      const { password } = this.getUpdate().$set;
+
+      if (password && password !== null) {
+        const newPassword = User.setPassword(password);
+
+        this.getUpdate().$set.password = newPassword;
+      } else {
+        delete this.getUpdate().$set.password;
+      }
+
+      next();
+    });
+
+    return schema;
   }
 }
 
