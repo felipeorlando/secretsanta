@@ -1,14 +1,30 @@
 class UserEditController {
-  constructor(User, $stateParams, $scope) {
+  constructor(User, $stateParams, $location, $mdToast, $scope) {
     'ngInject';
 
     this.id = $stateParams.id;
+    this.changePassword = false;
 
     User.find(this.id).then(res => {
       if (res.data.user && !res.data.error) {
         this.user = res.data.user;
+        this.user.password = null;
       }
     });
+
+    this.update = () => {
+      const user = this.user;
+
+      if (!this.changePassword) {
+        user.password = null;
+      }
+
+      User.update(this.id, { user }).then(res => {
+        $location.path('/users');
+        $mdToast.show($mdToast.newUser());
+      });
+    };
+
   }
 }
 

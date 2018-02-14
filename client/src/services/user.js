@@ -17,6 +17,10 @@ class UserService {
   create(params) {
     return this.http.post(`${this.api}/users`, params);
   }
+
+  update(id, params) {
+    return this.http.put(`${this.api}/users/${id}`, params);
+  }
 }
 
 export default UserService;

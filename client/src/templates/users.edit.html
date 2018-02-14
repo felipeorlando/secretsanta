@@ -1,17 +1,28 @@
 <h1 class="md-display-2">Edit User</h1>
 
-<form action="" layout-gt-sm="row">
+<form ng-submit="$userCtrl.update()" layout-gt-sm="row">
   <md-input-container class="md-block" flex-gt-sm>
     <label>Name</label>
-    <input ng-model="$userCtrl.user.name">
+    <input type="text" ng-model="$userCtrl.user.name" required>
   </md-input-container>
 
   <md-input-container class="md-block" flex-gt-sm>
     <label>Email</label>
-    <input ng-model="$userCtrl.user.email">
+    <input type="email" ng-model="$userCtrl.user.email" required>
+  </md-input-container>
+
+  <md-input-container class="md-block" flex-gt-sm>
+    <md-switch class="md-primary" ng-model="$userCtrl.changePassword" aria-label="Change Password">
+      Change password
+    </md-switch>
+  </md-input-container>
+
+  <md-input-container ng-show="$userCtrl.changePassword" class="md-block" flex-gt-sm>
+    <label>New password</label>
+    <input type="password" ng-model="$userCtrl.user.password" ng-required="$userCtrl.changePassword">
   </md-input-container>
 
   <div>
-    <md-button>Submit</md-button>
+    <md-button type="submit">Submit</md-button>
   </div>
 </form>
