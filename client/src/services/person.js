@@ -1,6 +1,6 @@
 class PersonService {
   constructor(AppConstants, $http) {
-    'ngInject';
+    "ngInject";
 
     this.api = AppConstants.api;
     this.http = $http;
@@ -8,6 +8,10 @@ class PersonService {
 
   all() {
     return this.http.get(`${this.api}/persons`);
+  }
+
+  find(id) {
+    return this.http.get(`${this.api}/persons/${id}`);
   }
 }
 
