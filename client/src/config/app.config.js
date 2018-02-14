@@ -45,6 +45,19 @@ function AppConfig(
       };
     }
   });
+
+  $mdToastProvider.addPreset('newPerson', {
+    options: function() {
+      return {
+        template:
+          '<md-toast>' +
+          '<span class="md-toast-text" flex>Person created succesfully!</span>' +
+          '</md-toast>',
+        controllerAs: '$toast',
+        bindToController: true
+      };
+    }
+  });
 }
 
 export default AppConfig;

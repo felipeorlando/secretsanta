@@ -1,17 +1,17 @@
 <h1 class="md-display-2">Create Person</h1>
 
-<form action="" layout-gt-sm="row">
+<form ng-submit="$personCtrl.submit()">
   <md-input-container class="md-block" flex-gt-sm>
     <label>Name</label>
-    <input ng-model="">
+    <input type="text" ng-model="$personCtrl.person.name" required>
   </md-input-container>
 
   <md-input-container class="md-block" flex-gt-sm>
     <label>Email</label>
-    <input ng-model="">
+    <input type="email" ng-model="$personCtrl.person.email" required>
   </md-input-container>
 
   <div>
-    <md-button>Submit</md-button>
+    <md-button type="submit">Submit</md-button>
   </div>
 </form>
