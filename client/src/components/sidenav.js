@@ -2,15 +2,15 @@ import template from '../templates/sidenav.html';
 
 class AppSidenavController {
   constructor(AppConstants, $mdSidenav, $scope) {
-    "ngInject";
+    'ngInject';
 
     this.appName = AppConstants.appName;
 
     this.menu = [
-      { title: "Home", route: "app.home", icon: "home" },
-      { title: "Persons", route: "app.persons", icon: "face" },
-      { title: "Users", route: "app.users", icon: "perm-identity" },
-      { title: "Logout", route: "app.users", icon: "exit-to-app" }
+      { title: 'Home', route: 'app.home', icon: 'home' },
+      { title: 'Persons', route: 'app.persons', icon: 'face' },
+      { title: 'Users', route: 'app.users', icon: 'perm-identity' },
+      { title: 'Logout', route: 'app.users', icon: 'exit-to-app' }
     ];
 
     this.toggleList = () => {

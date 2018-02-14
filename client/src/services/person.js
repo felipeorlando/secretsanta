@@ -21,6 +21,10 @@ class PersonService {
   update(id, params) {
     return this.http.put(`${this.api}/persons/${id}`, params);
   }
+
+  destroy(id) {
+    return this.http.delete(`${this.api}/persons/${id}`);
+  }
 }
 
 export default PersonService;

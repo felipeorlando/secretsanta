@@ -1,19 +1,20 @@
 <h1 class="md-display-2">Persons</h1>
 
 <md-list flex>
-  <md-list-item class="md-2-line md-with-secondary" ng-repeat="person in $personsCtrl.persons" ng-click="null">
+  <md-list-item class="md-3-line md-with-secondary" ng-repeat="person in $personsCtrl.persons" ng-click="null">
     <div class="md-list-item-text" layout="column">
       <h3>{{ person.name }}</h3>
       <h4>{{ person.email }}</h4>
+      <h4>{{ person._id }}</h4>
     </div>
 
     <div class="md-secondary-container">
       <a ui-sref="app.personsEdit({id: person._id})" md-no-ink class="md-secondary md-icon-button md-button ng-scope md-ink-ripple">
-        <md-icon md-svg-icon="mode-edit" ng-click=""></md-icon>
+        <md-icon md-svg-icon="mode-edit"></md-icon>
       </a>
 
-      <md-button md-no-ink class="md-secondary md-icon-button md-button ng-scope md-ink-ripple">
-        <md-icon md-svg-icon="delete" ng-click=""></md-icon>
+      <md-button ng-click="$personsCtrl.destroy(person._id)" md-no-ink class="md-secondary md-icon-button md-button ng-scope md-ink-ripple">
+        <md-icon md-svg-icon="delete"></md-icon>
       </md-button>
     </div>
   </md-list-item>
