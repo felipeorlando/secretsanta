@@ -9,6 +9,7 @@ class AuthRoute {
 
   init() {
     return this.router
+      .post('/check', this.authController.check)
       .post('/login', this.authController.login);
   }
 }
