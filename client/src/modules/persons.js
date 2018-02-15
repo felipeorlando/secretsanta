@@ -17,27 +17,34 @@ personsModule.controller('PersonEditController', PersonEditController);
 personsModule.config(($stateProvider) => {
   'ngInject';
 
+  const resolve = {
+    auth: (AuthService) => AuthService.ensureAuthIs(true)
+  };
+
   $stateProvider
     .state('app.persons', {
       url: '/persons',
       controller: 'PersonsController',
       controllerAs: '$personsCtrl',
       template: listTemplate,
-      title: 'Persons'
+      title: 'Persons',
+      resolve,
     })
     .state('app.personsNew', {
       url: '/persons/new',
       controller: 'PersonNewController',
       controllerAs: '$personCtrl',
       template: newTemplate,
-      title: 'Persons'
+      title: 'Persons',
+      resolve,
     })
     .state('app.personsEdit', {
       url: '/persons/:id/edit',
       controller: 'PersonEditController',
       controllerAs: '$personCtrl',
       template: editTemplate,
-      title: 'Persons'
+      title: 'Persons',
+      resolve,
     });
 });
 

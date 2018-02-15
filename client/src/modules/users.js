@@ -35,14 +35,16 @@ usersModule.config(($stateProvider) => {
       controller: 'UserNewController',
       controllerAs: '$userCtrl',
       template: newTemplate,
-      title: 'Users'
+      title: 'Users',
+      resolve
     })
     .state('app.usersEdit', {
       url: '/users/:id/edit',
       controller: 'UsersEditController',
       controllerAs: '$userCtrl',
       template: editTemplate,
-      title: 'Users'
+      title: 'Users',
+      resolve
     });
 });
 

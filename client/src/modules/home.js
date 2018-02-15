@@ -9,12 +9,17 @@ homeModule.controller('HomeController', HomeController);
 homeModule.config(($stateProvider) => {
   'ngInject';
 
+  const resolve = {
+    auth: (AuthService) => AuthService.ensureAuthIs(true)
+  };
+
   $stateProvider.state('app.home', {
     url: '/',
     controller: 'HomeController',
     controllerAs: '$ctrl',
     template,
-    title: 'Home'
+    title: 'Home',
+    resolve,
   });
 });
 
