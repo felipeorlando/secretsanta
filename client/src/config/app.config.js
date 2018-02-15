@@ -1,6 +1,8 @@
+import authInterceptor from './auth.inteceptor';
 import template from '../layout/index.html';
 
 function AppConfig(
+  $httpProvider,
   $locationProvider,
   $stateProvider,
   $urlRouterProvider,
@@ -9,6 +11,8 @@ function AppConfig(
   $mdToastProvider,
 ) {
   'ngInject';
+
+  $httpProvider.interceptors.push(authInterceptor);
 
   $locationProvider.html5Mode(true);
 

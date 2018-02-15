@@ -1,0 +1,17 @@
+<h1 class="md-display-2">Login</h1>
+
+<form ng-submit="$authCtrl.submitForm()" layout-gt-sm="row">
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Email</label>
+    <input type="email" ng-model="$authCtrl.user.email" required>
+  </md-input-container>
+
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Password</label>
+    <input type="password" ng-model="$authCtrl.user.password" required>
+  </md-input-container>
+
+  <div>
+    <md-button type="submit">Enter</md-button>
+  </div>
+</form>

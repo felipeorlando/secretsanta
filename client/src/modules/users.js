@@ -4,7 +4,7 @@ import UsersController from '../controllers/users';
 import UserNewController from '../controllers/users/new';
 import UsersEditController from '../controllers/users/edit';
 
-import listTemplate from "../templates/users.html";
+import listTemplate from '../templates/users.html';
 import newTemplate from '../templates/users.new.html';
 import editTemplate from '../templates/users.edit.html';
 
@@ -17,13 +17,18 @@ usersModule.controller('UsersEditController', UsersEditController);
 usersModule.config(($stateProvider) => {
   'ngInject';
 
+  const resolve = {
+    auth: (AuthService) => AuthService.ensureAuthIs(true)
+  };
+
   $stateProvider
     .state('app.users', {
       url: '/users',
       controller: 'UsersController',
       controllerAs: '$usersCtrl',
       template: listTemplate,
-      title: 'Users'
+      title: 'Users',
+      resolve
     })
     .state('app.usersNew', {
       url: '/users/new',

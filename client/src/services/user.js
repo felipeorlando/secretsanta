@@ -1,6 +1,6 @@
 class UserService {
   constructor(AppConstants, $http) {
-    "ngInject";
+    'ngInject';
 
     this.api = AppConstants.api;
     this.http = $http;

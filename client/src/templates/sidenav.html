@@ -5,8 +5,13 @@
 
   <a ui-sref="{{item.route}}" ng-click="$sidenavCtrl.toggleList()" ng-repeat="item in $sidenavCtrl.menu">
     <md-button md-no-ink class="md-primary sidenav__button">
-      <md-icon md-svg-icon="{{item.icon}}" ng-click=""></md-icon>
+      <md-icon md-svg-icon="{{item.icon}}"></md-icon>
       {{item.title}}
     </md-button>
   </a>
+
+  <md-button ng-click="$sidenavCtrl.logout()" md-no-ink class="md-primary sidenav__button">
+    <md-icon md-svg-icon="exit-to-app"></md-icon>
+    Logout
+  </md-button>
 </md-sidenav>
