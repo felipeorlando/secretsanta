@@ -2,6 +2,6 @@
   "id": "client",
   "port": 3000,
   "engines": {
-    "node": "8.9.4"
+    "node": ">=8.6.0"
   }
 }
