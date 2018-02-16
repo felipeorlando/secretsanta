@@ -1,7 +1,7 @@
 import dialog from '../../components/dialog';
 
 class PersonsController {
-  constructor(Person, $mdDialog, $scope) {
+  constructor(Person, AppConstants, $http, $mdDialog, $scope) {
     'ngInject';
 
     Person.all().then(res => {
@@ -24,11 +24,29 @@ class PersonsController {
       });
     }
 
-    this.match = () => dialog(
-      'Matched!', 
-      'Each person will receive a email with matched friend!', 
-      $mdDialog
-    );
+    this.api = AppConstants.api;    
+    this.http = $http;
+    this.mdDialog = $mdDialog;
+  }
+
+  match() {
+    return this.http
+      .post(`${this.api}/persons/match`)
+      .then(res => {
+        if (res.data.job.success) {
+          dialog(
+            'Matched!',
+            'Each person will receive a email with matched friend!',
+            this.mdDialog
+          );
+        } else {
+          dialog(
+            'Wait!',
+            'Something is wrog!',
+            this.mdDialog
+          );
+        }
+      });
   }
 }
 
