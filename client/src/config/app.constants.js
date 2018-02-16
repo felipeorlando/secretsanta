@@ -1,6 +1,6 @@
 const AppConstants = {
   appName: 'SecretSanta',
-  api: process.env.API || 'http://localhost:8888',
+  api: 'https://api-k121.wedeploy.io',
   jwtKey: 'secretSantaToken',
 };
 
