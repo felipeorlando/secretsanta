@@ -1,7 +1,16 @@
 import dialog from '../components/dialog';
 
 class AuthService {
-  constructor(AppConstants, User, JWT, $http, $state, $q, $mdDialog) {
+  constructor(
+    AppConstants,
+    User,
+    JWT,
+    $http,
+    $state,
+    $q,
+    $mdDialog,
+    $rootScope
+  ) {
     'ngInject';
 
     this.api = AppConstants.api;
@@ -11,6 +20,14 @@ class AuthService {
     this.state = $state;
     this.q = $q;
     this.mdDialog = $mdDialog;
+
+    this.loggedTrully = () => {
+      $rootScope.logged = true;
+    }
+
+    this.loggedFalsy = () => {
+      $rootScope.logged = false;
+    }
   }
 
   attempt(user) {
@@ -72,6 +89,20 @@ class AuthService {
         deferred.resolve(false);
       } else {
         deferred.resolve(true);
+      }
+    });
+
+    return deferred.promise;
+  }
+
+  isLogged() {
+    let deferred = this.q.defer();
+
+    this.verifyAuth().then((authValid) => {
+      if (authValid) {
+        deferred.resolve(true);
+      } else {
+        deferred.resolve(false);
       }
     });
 

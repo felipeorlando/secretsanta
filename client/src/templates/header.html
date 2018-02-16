@@ -1,5 +1,5 @@
 <md-toolbar layout="row" class="md-toolbar-tools">
-  <md-button class="menu md-icon-button" aria-label="Show User List">
+  <md-button ng-show="$headerCtrl.logged" class="menu md-icon-button" aria-label="Show User List">
     <md-icon md-svg-icon="menu" ng-click="$headerCtrl.toggleList()"></md-icon>
   </md-button>
 
