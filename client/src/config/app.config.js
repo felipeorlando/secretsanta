@@ -11,7 +11,7 @@ function AppConfig(
 ) {
   'ngInject';
 
-  $httpProvider.interceptors.push(authInterceptor);
+  // $httpProvider.interceptors.push(authInterceptor);
 
   $locationProvider.html5Mode(true);
 
