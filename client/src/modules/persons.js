@@ -35,7 +35,7 @@ personsModule.config(($stateProvider) => {
       controller: 'PersonNewController',
       controllerAs: '$personCtrl',
       template: newTemplate,
-      title: 'Persons',
+      title: 'Create Person',
       resolve,
     })
     .state('app.personsEdit', {
@@ -43,7 +43,7 @@ personsModule.config(($stateProvider) => {
       controller: 'PersonEditController',
       controllerAs: '$personCtrl',
       template: editTemplate,
-      title: 'Persons',
+      title: 'Edit Person',
       resolve,
     });
 });

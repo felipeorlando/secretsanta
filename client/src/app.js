@@ -6,6 +6,7 @@ import 'angular-animate';
 import 'angular-aria';
 import 'angular-material';
 import 'angular-ui-router';
+import 'stateEvents';
 
 import AppConstants from './config/app.constants';
 import AppConfig from './config/app.config';
@@ -20,6 +21,7 @@ import './modules/persons';
 
 const requires = [
   'ui.router',
+  'ui.router.state.events',
   'ngMaterial',
   'app.layout',
   'app.home',

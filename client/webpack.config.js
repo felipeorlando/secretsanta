@@ -13,6 +13,11 @@ module.exports = {
        { test: /\.css$/, loader: 'style!css' }
     ]
   },
+  resolve: {
+    alias: {
+      'stateEvents': '../node_modules/angular-ui-router/release/stateEvents.js',
+    }
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
