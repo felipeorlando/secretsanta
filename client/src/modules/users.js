@@ -36,7 +36,7 @@ usersModule.config(($stateProvider) => {
       controllerAs: '$userCtrl',
       template: newTemplate,
       title: 'Create User',
-      // resolve
+      resolve
     })
     .state('app.usersEdit', {
       url: '/users/:id/edit',

@@ -10,7 +10,7 @@ class UserRoute {
 
   init() {
     return this.router
-      // .use(AuthService.authenticate())
+      .use(AuthService.authenticate())
       .get('/', this.userController.index)
       .post('/', this.userController.create)
       .get('/:id', this.userController.show)
