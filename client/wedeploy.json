@@ -1,0 +1,7 @@
+{
+  "id": "client",
+  "port": 3000,
+  "engines": {
+    "node": "8.9.4"
+  }
+}
