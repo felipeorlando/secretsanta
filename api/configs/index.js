@@ -6,7 +6,7 @@ const configs = {
   },
 
   db: {
-    config: process.env.MONGO_CONFIG || 'mongodb://localhost/secretsanta',
+    config: process.env.MONGO_CONFIG || 'mongodb://localhost/secretSanta',
   },
 
   redis: {

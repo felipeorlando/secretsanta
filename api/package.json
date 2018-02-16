@@ -10,7 +10,7 @@
     "esm": "all"
   },
   "scripts": {
-    "start": "npm run dev",
+    "start": "node -r @std/esm app.js",
     "dev": "export NODE_ENV=development && nodemon -r @std/esm app.js"
   },
   "author": "Felipe Orlando",
