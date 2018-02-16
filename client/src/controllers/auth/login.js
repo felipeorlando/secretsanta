@@ -1,11 +1,14 @@
+import dialog from '../../components/dialog';
+
 class AuthLoginController {
-  constructor(AuthService, $state) {
+  constructor(AuthService, $state, $mdDialog) {
     'ngInject';
 
     this.authService = AuthService;
     this.state = $state;
 
     this.authType = $state.current.name;
+    this.mdDialog = $mdDialog;
   }
 
   submitForm() {
@@ -14,10 +17,21 @@ class AuthLoginController {
     this.authService.attempt(this.user).then(
       (res) => {
         this.state.go('app.home');
+
+        dialog(
+          'Done!',
+          'You\'re logged in!',
+          this.mdDialog
+        );
       },
       (err) => {
         this.isSubmitting = false;
-        // this.errors = err.data.errors;
+
+        dialog(
+          'Fail! 😕',
+          'Email or password is wrong',
+          this.mdDialog
+        );
       }
     )
   }

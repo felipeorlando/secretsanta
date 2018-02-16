@@ -1,5 +1,7 @@
+import dialog from '../../components/dialog';
+
 class PersonNewController {
-  constructor(Person, $stateParams, $location, $mdToast, $scope) {
+  constructor(Person, $stateParams, $location, $mdDialog, $scope) {
     'ngInject';
 
     this.submit = () => {
@@ -8,7 +10,11 @@ class PersonNewController {
       Person.create({ person }).then(res => {
         $location.path('/persons');
 
-        $mdToast.show($mdToast.newPerson());
+        dialog(
+          'Done!',
+          'Person was created succesfully!',
+          $mdDialog
+        );
       });
     };
   }

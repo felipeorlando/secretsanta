@@ -1,9 +1,15 @@
 <div layout="row" layout-align="space-between center">
   <h1 class="md-display-2">Persons</h1>
 
-  <a ui-sref="app.personsNew" md-no-ink class="md-button md-secondary">
-    Add Person
-  </a>
+  <div layout="column" layout-align="center end">
+    <a ui-sref="app.personsNew" md-no-ink class="md-button md-secondary">
+      Add Person
+    </a>
+    
+    <md-button ng-click="$personsCtrl.match()" class="md-button md-primary">
+      Match ❤️
+    </a>
+  </div>
 </div>
 
 <div ng-hide="$personsCtrl.persons.length" layout="row" layout-align="center center">
@@ -11,11 +17,10 @@
 </div>
 
 <md-list ng-show="$personsCtrl.persons.length" flex>
-  <md-list-item class="md-3-line md-with-secondary" ng-repeat="person in $personsCtrl.persons">
+  <md-list-item class="md-2-line md-with-secondary" ng-repeat="person in $personsCtrl.persons">
     <div class="md-list-item-text" layout="column">
       <h3>{{ person.name }}</h3>
       <h4>{{ person.email }}</h4>
-      <h4>{{ person._id }}</h4>
     </div>
 
     <div class="md-secondary-container">

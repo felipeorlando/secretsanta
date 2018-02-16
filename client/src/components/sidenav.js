@@ -1,7 +1,8 @@
 import template from '../templates/sidenav.html';
+import dialog from '../components/dialog';
 
 class AppSidenavController {
-  constructor(AppConstants, JWT, $mdSidenav, $state, $scope) {
+  constructor(AppConstants, JWT, $mdSidenav, $state, $mdDialog, $scope) {
     'ngInject';
 
     this.appName = AppConstants.appName;
@@ -15,12 +16,19 @@ class AppSidenavController {
     this.jwt = JWT;
     this.state = $state;
     this.sidenav = $mdSidenav;
+    this.mdDialog = $mdDialog;
   }
 
   logout() {
     this.jwt.destroy();
     this.toggleList();
     this.state.go('app.authLogin');
+
+    dialog(
+      'Done!',
+      'You are logged out! 🔐',
+      this.mdDialog
+    );
   }
 
   toggleList($mdSidenav) {

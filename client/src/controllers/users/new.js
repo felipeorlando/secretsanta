@@ -1,5 +1,6 @@
+import dialog from '../../components/dialog';
 class UserNewController {
-  constructor(User, $stateParams, $location, $mdToast, $scope) {
+  constructor(User, $stateParams, $location, $mdDialog, $scope) {
     'ngInject';
 
     this.id = $stateParams.id;
@@ -10,7 +11,11 @@ class UserNewController {
       User.create({ user }).then(res => {
         $location.path('/users');
 
-        $mdToast.show($mdToast.newUser());
+        dialog(
+          'Done!',
+          'User was created succesfully!',
+          $mdDialog
+        );
       });
     };
   }

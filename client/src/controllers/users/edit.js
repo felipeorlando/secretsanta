@@ -1,5 +1,6 @@
+import dialog from '../../components/dialog';
 class UserEditController {
-  constructor(User, $stateParams, $location, $mdToast, $scope) {
+  constructor(User, $stateParams, $location, $mdDialog, $scope) {
     'ngInject';
 
     this.id = $stateParams.id;
@@ -21,7 +22,12 @@ class UserEditController {
 
       User.update(this.id, { user }).then(res => {
         $location.path('/users');
-        $mdToast.show($mdToast.newUser());
+        
+        dialog(
+          'Done!',
+          'User was updated succesfully!',
+          $mdDialog
+        );
       });
     };
   }

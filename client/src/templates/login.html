@@ -1,12 +1,12 @@
 <h1 class="md-display-2">Login</h1>
 
-<form ng-submit="$authCtrl.submitForm()" layout-gt-sm="row">
-  <md-input-container class="md-block" flex-gt-sm>
+<form ng-submit="$authCtrl.submitForm()">
+  <md-input-container class="md-block">
     <label>Email</label>
     <input type="email" ng-model="$authCtrl.user.email" required>
   </md-input-container>
 
-  <md-input-container class="md-block" flex-gt-sm>
+  <md-input-container class="md-block">
     <label>Password</label>
     <input type="password" ng-model="$authCtrl.user.password" required>
   </md-input-container>

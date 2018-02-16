@@ -1,5 +1,7 @@
+import dialog from '../../components/dialog';
+
 class PersonsController {
-  constructor(Person, $mdToast, $scope) {
+  constructor(Person, $mdDialog, $scope) {
     'ngInject';
 
     Person.all().then(res => {
@@ -13,8 +15,20 @@ class PersonsController {
         });
 
         this.persons.splice(index, 1);
+
+        dialog(
+          'Done!',
+          'Person was deleted succesfully!',
+          $mdDialog
+        );
       });
     }
+
+    this.match = () => dialog(
+      'Matched!', 
+      'Each person will receive a email with matched friend!', 
+      $mdDialog
+    );
   }
 }
 

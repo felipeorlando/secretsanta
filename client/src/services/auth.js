@@ -1,5 +1,7 @@
+import dialog from '../components/dialog';
+
 class AuthService {
-  constructor(AppConstants, User, JWT, $http, $state, $q) {
+  constructor(AppConstants, User, JWT, $http, $state, $q, $mdDialog) {
     'ngInject';
 
     this.api = AppConstants.api;
@@ -8,6 +10,7 @@ class AuthService {
     this.http = $http;
     this.state = $state;
     this.q = $q;
+    this.mdDialog = $mdDialog;
   }
 
   attempt(user) {
@@ -59,7 +62,13 @@ class AuthService {
 
     this.verifyAuth().then((authValid) => {
       if (authValid !== bool) {
-        this.state.go('app.authLogin')
+        dialog(
+          'Wait! ⛔️',
+          'You\'re not logged in!',
+          this.mdDialog
+        );
+
+        this.state.go('app.authLogin');
         deferred.resolve(false);
       } else {
         deferred.resolve(true);
