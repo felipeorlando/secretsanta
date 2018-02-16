@@ -1,6 +1,6 @@
 const AppConstants = {
   appName: 'SecretSanta',
-  api: 'http://localhost:8888',
+  api: process.env.API || 'http://localhost:8888',
   jwtKey: 'secretSantaToken',
 };
 
