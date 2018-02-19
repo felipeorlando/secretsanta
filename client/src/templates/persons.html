@@ -6,7 +6,7 @@
       Add Person
     </a>
     
-    <md-button ng-click="$personsCtrl.match()" class="md-button md-primary">
+    <md-button ng-show="$personsCtrl.persons.length" ng-click="$personsCtrl.match()" class="md-button md-primary">
       Match ❤️
     </a>
   </div>
