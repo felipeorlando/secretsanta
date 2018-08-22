@@ -1,4 +1,4 @@
-# K121 - SecretSanta 🎄
+# secretsanta 🎄
 
 This is as simple manager for CRUD users (admin) and persons, to match each person with a friend, aka SecretSanta game. 🎅
 
